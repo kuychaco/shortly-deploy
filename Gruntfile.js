@@ -124,18 +124,52 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
+  // grunt.registerTask('test', [
+  //   'mochaTest'
+  // ]);
+
+  // grunt.registerTask('build', [
+
+  // ]);
+
+  // grunt.registerTask('upload', function(n) {
+  //   if(grunt.option('prod')) {
+  //     // add your production server task here
+
+
+  //   } else {
+  //     grunt.task.run([ 'server-dev' ]);
+  //   }
+  // });
+
+  // grunt.registerTask('deploy', [
+
+  //   // add your deploy tasks here
+  // ]);
+
+  // // grunt.registerTask('whatever', [
+  // //   'jshint', 'concat', 'uglify'
+  // // ]);
+
+
+
+
+
   grunt.registerTask('test', [
     'mochaTest'
   ]);
 
   grunt.registerTask('build', [
-
+    'jshint',
+    'concat',
+    'uglify',
+    'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
       // add your production server task here
-
+      grunt.task.run([ 'shell:prodServer' ]);
 
     } else {
       grunt.task.run([ 'server-dev' ]);
@@ -143,43 +177,11 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-
+    'test',
+    'build',
+    'shell:prodServer'  // TODO: investigate 'upload' task
+    // 'upload'
     // add your deploy tasks here
   ]);
 
-  // grunt.registerTask('whatever', [
-  //   'jshint', 'concat', 'uglify'
-  // ]);
-
-
 };
-
-
-
-// grunt.registerTask('test', [
-//   'mochaTest'
-// ]);
-
-// grunt.registerTask('build', [
-//   'jshint',
-//   'concat',
-//   'uglify',
-//   'cssmin'
-// ]);
-
-// grunt.registerTask('upload', function(n) {
-//   if(grunt.option('prod')) {
-//     // add your production server task here
-//     grunt.task.run([ 'shell:prodServer' ]);
-
-//   } else {
-//     grunt.task.run([ 'server-dev' ]);
-//   }
-// });
-
-// grunt.registerTask('deploy', [
-//   'test',
-//   'build',
-//   'upload'
-//   // add your deploy tasks here
-// ]);
